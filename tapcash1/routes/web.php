@@ -9,7 +9,7 @@ use App\Http\Controllers\DashboardController;
 Route::get('/main-dashboard', [DashboardController::class, 'index']);
 
 Route::get('/', [TapcashController::class, 'dashboard']);
-Route::get('/dashboard', [TapcashController::class, 'dashboard']);
+Route::get('/dashboard', [TapcashController::class, 'index']);
 Route::get('/master-tipe', [TapcashController::class, 'masterTipe']);
 Route::post('/master-tipe', [TapcashController::class, 'storeTipe']);
 Route::delete('/master-tipe/{id}', [TapcashController::class, 'destroyTipe']);
