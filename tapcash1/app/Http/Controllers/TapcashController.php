@@ -8,6 +8,38 @@ use App\Models\Tapcash;
 class TapcashController extends Controller
 {
        /**
+        * Download Tapcash data as Excel (CSV).
+        */
+       public function downloadExcel()
+       {
+              $tapcash = \App\Models\Tapcash::all();
+              $filename = 'tapcash_export_' . date('Ymd_His') . '.csv';
+              $headers = [
+                     'Content-Type' => 'text/csv',
+                     'Content-Disposition' => "attachment; filename=$filename"
+              ];
+              $columns = ['no_tapcash', 'uid', 'tipe', 'tanggal_expired', 'nama', 'npp', 'keterangan', 'perusahaan', 'status'];
+              $callback = function() use ($tapcash, $columns) {
+                     $file = fopen('php://output', 'w');
+                     fputcsv($file, $columns);
+                     foreach ($tapcash as $row) {
+                            fputcsv($file, [
+                                   $row->no_tapcash,
+                                   $row->uid,
+                                   $row->tipe,
+                                   $row->tanggal_expired,
+                                   $row->nama,
+                                   $row->npp,
+                                   $row->keterangan,
+                                   $row->perusahaan,
+                                   $row->status
+                            ]);
+                     }
+                     fclose($file);
+              };
+              return response()->stream($callback, 200, $headers);
+       }
+       /**
         * Update the specified Tapcash in storage.
         */
        public function updateTapcash(\Illuminate\Http\Request $request, $id)
