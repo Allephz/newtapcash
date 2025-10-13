@@ -20,7 +20,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $this->call(TipeSeeder::class);
+
+        $this->call([
+            TipeSeeder::class,
+            TapcashSeeder::class,
+        ]);
 
         // Seeder user admin
         \App\Models\User::updateOrCreate([

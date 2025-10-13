@@ -1,7 +1,12 @@
+
+
+
 <?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TapcashController;
+use App\Http\Controllers\DashboardController;
+Route::get('/main-dashboard', [DashboardController::class, 'index']);
 
 Route::get('/', [TapcashController::class, 'dashboard']);
 Route::get('/dashboard', [TapcashController::class, 'dashboard']);

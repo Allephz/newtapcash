@@ -5,7 +5,8 @@
             <h2 class="text-white">Tapcash</h2>
         </div>
         <nav class="nav flex-column px-3">
-            <a class="nav-link text-white {{ request()->is('dashboard') ? 'active bg-dark' : '' }}" href="/dashboard">Dashboard</a>
+            <a class="nav-link text-white {{ request()->is('main-dashboard') ? 'active bg-dark' : '' }}" href="/main-dashboard"><i class="bi bi-house-door me-2"></i>Dashboard</a>
+            <a class="nav-link text-white {{ request()->is('dashboard') ? 'active bg-dark' : '' }}" href="/dashboard"><i class="bi bi-card-list me-2"></i>Daftar Tapcash</a>
             <a class="nav-link text-white {{ request()->is('master-tipe') ? 'active bg-dark' : '' }}" href="/master-tipe">Master Tipe</a>
             <a class="nav-link text-white {{ request()->is('tambah-tapcash') ? 'active bg-dark' : '' }}" href="/tambah-tapcash">Tambah Tapcash</a>
                 <a class="nav-link text-white {{ request()->is('download-excel') ? 'active bg-dark' : '' }}" href="/download-excel">Download Excel</a>

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<h3 class="mb-4">Dashboard Tapcash</h3>
+<h3 class="mb-4">Daftar Tapcash</h3>
 <div class="card">
     <div class="card-body">
         <table class="table table-bordered">

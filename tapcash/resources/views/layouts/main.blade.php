@@ -9,27 +9,51 @@
     <style>
         body { background: #f5f7fa; }
         .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 16.6667%; /* col-2 Bootstrap, bisa diganti 250px */
             min-height: 100vh;
-            background: #2c3e50;
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
             color: #fff;
             padding-top: 40px;
+            box-shadow: 2px 0 16px 0 rgba(44,62,80,0.15);
+            border-top-right-radius: 32px;
+            border-bottom-right-radius: 32px;
+            transition: background 0.3s;
+            z-index: 100;
         }
         .sidebar a {
             color: #fff;
-            display: block;
-            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
             text-decoration: none;
             font-weight: 500;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
         }
         .sidebar a.active, .sidebar a:hover {
-            background: #34495e;
+            background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
             color: #fff;
+            transform: translateX(6px) scale(1.04);
+            box-shadow: 0 2px 12px 0 rgba(0,114,255,0.10);
         }
         .sidebar h2 {
             font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             text-align: center;
+            letter-spacing: 2px;
+            color: #00c6ff;
+            text-shadow: 0 2px 8px rgba(0,198,255,0.15);
+        }
+        .sidebar img {
+            filter: drop-shadow(0 2px 8px rgba(0,198,255,0.15));
         }
     </style>
 </head>
@@ -38,9 +62,15 @@
     <div class="row">
         <div class="col-2 sidebar d-flex flex-column justify-content-between" style="min-height:100vh;">
             <div>
+                <div class="mb-3 text-center">
+                    <img src="/Pelindo – Logo.jpeg" alt="Pelindo Logo" style="max-width:100px;max-height:80px;">
+                </div>
                 <h2>Tapcash</h2>
-                <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">
+                <a href="/main-dashboard" class="{{ request()->is('main-dashboard') ? 'active' : '' }}">
                     <i class="bi bi-house-door me-2"></i>Dashboard
+                </a>
+                <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">
+                    <i class="bi bi-card-list me-2"></i>Daftar Tapcash
                 </a>
                 <a href="/master-tipe" class="{{ request()->is('master-tipe') ? 'active' : '' }}">
                     <i class="bi bi-list-ul me-2"></i>Master Tipe
@@ -59,7 +89,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-10 py-5">
+    <div class="col-10 py-5" style="margin-left:16.6667%;">
             @yield('content')
         </div>
     </div>
