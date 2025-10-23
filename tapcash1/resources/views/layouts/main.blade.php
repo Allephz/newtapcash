@@ -78,9 +78,19 @@
                 <a href="/tambah-tapcash" class="{{ request()->is('tambah-tapcash') ? 'active' : '' }}">
                     <i class="bi bi-plus-square me-2"></i>Tambah Tapcash
                 </a>
-                <a href="/download-excel" class="{{ request()->is('download-excel') ? 'active' : '' }}">
-                    <i class="bi bi-file-earmark-arrow-down me-2"></i>Download Excel
-                </a>
+                <!-- Download control: pilih tipe atau unduh semua -->
+                <div class="px-3 my-3">
+                    <label class="small" style="color:#fff; font-weight:600;">Unduh Excel / CSV</label>
+                    <div class="d-flex mt-2">
+                        <select id="sidebarTipeSelect" class="form-select form-select-sm">
+                            <option value="">Semua Tipe</option>
+                            @foreach(\App\Models\Tipe::all() as $s)
+                                <option value="{{ urlencode($s->nama_tipe) }}">{{ $s->nama_tipe }}</option>
+                            @endforeach
+                        </select>
+                        <button id="sidebarDownloadBtn" class="btn btn-primary btn-sm ms-2">Unduh</button>
+                    </div>
+                </div>
             </div>
             <div class="mb-4 px-3">
                 <form method="POST" action="{{ route('logout') }}">
@@ -95,5 +105,22 @@
     </div>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            var btn = document.getElementById('sidebarDownloadBtn');
+            if(btn){
+                btn.addEventListener('click', function(){
+                    var sel = document.getElementById('sidebarTipeSelect');
+                    var val = sel ? sel.value : '';
+                    if(!val) {
+                        window.location.href = '/download-excel';
+                    } else {
+                        window.location.href = '/download-excel/tipe/' + val;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

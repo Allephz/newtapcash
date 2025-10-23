@@ -26,3 +26,4 @@ Route::put('/dashboard/{id}', [TapcashController::class, 'updateTapcash']);
 Route::delete('/dashboard/{id}', [TapcashController::class, 'destroyTapcash']);
 // Route untuk download CSV
 Route::get('/download-excel', [TapcashController::class, 'downloadExcel']);
+Route::get('/download-excel/tipe/{tipe}', [TapcashController::class, 'downloadExcelByTipe']);
