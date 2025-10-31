@@ -69,14 +69,22 @@
                 <a href="/main-dashboard" class="{{ request()->is('main-dashboard') ? 'active' : '' }}">
                     <i class="bi bi-house-door me-2"></i>Dashboard
                 </a>
-                <a href="/dashboard" class="{{ request()->is('dashboard') ? 'active' : '' }}">
-                    <i class="bi bi-card-list me-2"></i>Daftar Tapcash
+                {{-- Daftar Tapcash with tipe dropdown --}}
+                <a href="#daftarTapcashSubmenu" data-bs-toggle="collapse" aria-expanded="{{ (request()->is('dashboard') || request()->is('dashboard/tipe/*')) ? 'true' : 'false' }}" class="d-flex align-items-center justify-content-between {{ (request()->is('dashboard') || request()->is('dashboard/tipe/*')) ? 'active' : '' }}" style="padding:14px 28px; text-decoration:none;">
+                    <span><i class="bi bi-card-list me-2"></i>Daftar Tapcash</span>
+                    <i class="bi bi-chevron-down"></i>
                 </a>
+                <div class="collapse {{ (request()->is('dashboard') || request()->is('dashboard/tipe/*')) ? 'show' : '' }}" id="daftarTapcashSubmenu">
+                    <div class="px-3">
+                        <a href="/dashboard" class="d-block py-2 {{ request()->is('dashboard') ? 'active' : '' }}" style="color:#fff; text-decoration:none;">Semua Tipe</a>
+                        @php $currentTipe = urldecode(request()->segment(3) ?? ''); @endphp
+                        @foreach(\App\Models\Tipe::all() as $s)
+                            <a href="/dashboard/tipe/{{ urlencode($s->nama_tipe) }}" class="d-block py-2 {{ ($currentTipe === $s->nama_tipe) ? 'active' : '' }}" style="color:#fff; text-decoration:none;">{{ $s->nama_tipe }}</a>
+                        @endforeach
+                    </div>
+                </div>
                 <a href="/master-tipe" class="{{ request()->is('master-tipe') ? 'active' : '' }}">
                     <i class="bi bi-list-ul me-2"></i>Master Tipe
-                </a>
-                <a href="/tambah-tapcash" class="{{ request()->is('tambah-tapcash') ? 'active' : '' }}">
-                    <i class="bi bi-plus-square me-2"></i>Tambah Tapcash
                 </a>
                 <!-- Download control: pilih tipe atau unduh semua -->
                 <div class="px-3 my-3">

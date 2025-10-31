@@ -1,7 +1,10 @@
 
 @extends('layouts.main')
 @section('content')
-<h2 class="mb-4">Dashboard Tapcash</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Dashboard Tapcash</h2>
+    <a href="/tambah-tapcash" class="btn btn-primary">Tambah Tapcash</a>
+</div>
 <div class="card rounded-4 shadow-sm" style="background:#f3f4f8;">
     <div class="card-body">
         <table class="table table-bordered align-middle" style="background:#fff;">

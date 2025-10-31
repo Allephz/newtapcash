@@ -136,6 +136,16 @@ class TapcashController extends Controller
           return view('daftar_tapcash', compact('tapcash'));
     }
 
+              /**
+               * Display Tapcash rows filtered by a given tipe.
+               */
+              public function indexByTipe($tipe)
+              {
+                     $tipe = urldecode($tipe);
+                     $tapcash = Tapcash::where('tipe', $tipe)->get();
+                     return view('daftar_tapcash', compact('tapcash'));
+              }
+
     public function dashboard()
     {
            // Contoh data, sesuaikan dengan data asli Anda
